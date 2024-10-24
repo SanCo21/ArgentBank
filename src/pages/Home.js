@@ -3,7 +3,7 @@ import FeatureItem from '../components/FeatureItem';
 
 const Home = () => {
     return (
-        <div>
+        <main>
             <Hero />
             <section className="features">
                 <h2 className="sr-only">Features</h2>
@@ -26,7 +26,7 @@ const Home = () => {
                     description="We use top of the line encryption to make sure your data and money is always safe."
                 />
             </section>
-        </div>
+        </main>
     );
 }
 

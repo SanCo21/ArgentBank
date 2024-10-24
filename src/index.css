@@ -12,7 +12,9 @@ code {
     monospace;
 } */
 
-html {
+html, body {
+  height: 100%;
+  margin: 0;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -21,7 +23,7 @@ html {
 }
 
 body {
-  margin: 0;
+  /* margin: 0; */
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -29,9 +31,12 @@ body {
 
 .main {
   flex: 1;
+  height: 100%; /* Cover the entire height of the viewport */
+  min-height: 78.5vh; /* Assure a minimal height of 100vh */
 }
 
 .bg-dark {
+  display: flex;
   background-color: #12002b;
 }
 
@@ -173,7 +178,7 @@ margin-right: 0.27rem;
 
 .sign-in-button {
   display: block;
-  width: 100%;
+  /* width: 100%; */
   padding: 8px;
   font-size: 1.1rem;
   font-weight: bold;
@@ -184,17 +189,19 @@ margin-right: 0.27rem;
 }
 
 .sign-in-content {
+  /* display: flex; */
   box-sizing: border-box;
   background-color: white;
   width: 300px;
+  height: 31%;
   margin: 0 auto;
   margin-top: 3rem;
   padding: 2rem;
 }
 
-.sign-in-icon {
+/* .sign-in-icon {
   font-size: 5rem;
-}
+} */
 
 .input-remember {
   display: flex;
