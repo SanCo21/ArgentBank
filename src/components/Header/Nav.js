@@ -1,12 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Nav = () => (
+const Nav = ({isSignedIn, username}) => (
   <div>
-    <Link className="main-nav-item" to="/Sign-in">
-      <i className="fa fa-user-circle"></i>
-      Sign In
-    </Link>
+    {isSignedIn ? (
+      <div>
+        <Link className="main-nav-item" to="/User">
+          <i className="fa fa-user-circle"></i>
+          {username}
+        </Link>
+        <Link className="main-nav-item" to="/">
+          <i className="fa fa-sign-out"></i>
+          Sign Out
+        </Link>
+      </div>
+    ) : (
+      <div>
+        <Link className="main-nav-item" to="/Sign-in">
+          <i className="fa fa-user-circle"></i>
+          Sign In
+        </Link>
+      </div>
+    )}
   </div>
 );
 

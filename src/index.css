@@ -22,7 +22,7 @@ html, body {
   color: #2c3e50;
 }
 
-body {
+body, #root {
   /* margin: 0; */
   display: flex;
   flex-direction: column;
@@ -31,12 +31,14 @@ body {
 
 .main {
   flex: 1;
-  height: 100%; /* Cover the entire height of the viewport */
-  min-height: 78.5vh; /* Assure a minimal height of 100vh */
+  /* height: 100%;  */
+  /* Cover the entire height of the viewport */
+  min-height: 85vh; 
+  /* Assure a minimal height */
 }
 
 .bg-dark {
-  display: flex;
+  /* height: 96%; */
   background-color: #12002b;
 }
 
@@ -189,7 +191,6 @@ margin-right: 0.27rem;
 }
 
 .sign-in-content {
-  /* display: flex; */
   box-sizing: border-box;
   background-color: white;
   width: 300px;
