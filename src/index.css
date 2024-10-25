@@ -96,7 +96,7 @@ margin-right: 0.27rem;
 }
 
 .hero {
-  background-image: url('/public/images/bank-tree.jpeg');
+  background-image: url('/public/images/bank-tree.webp');
   background-position: 0 -50px;
   background-size: cover;
   background-repeat: no-repeat;
@@ -226,6 +226,87 @@ margin-right: 0.27rem;
 .input-wrapper input {
   padding: 5px;
   font-size: 1.2rem;
+}
+
+.edit-form-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  /* gap: 1rem; */
+}
+
+.edit-input-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem; 
+  margin-bottom: 1rem ;
+  font-size: 0.85rem;
+}
+
+.edit-input-wrapper label {  
+  flex: 1; /* Ensures inputs take appropriate space */
+  /* align-self: center; */
+  text-align: right;
+  /* justify-content: end; */
+}
+
+.edit-input-wrapper input {
+  flex: 1; /*Ensure input takes available space */
+  font-size: 0.8rem;
+  height: 20px;
+  max-width: 100px;
+  border-radius: 3px;
+  border: 1px solid #aaa8a8;
+  /* display: flex; */
+}
+
+.edit-input-wrapper input[disabled] {
+  background-color: #88abce; 
+  cursor: not-allowed;
+}
+
+.edit-button-group {
+  /* grid-column: 1 / span 2; */
+  display: flex;
+  justify-content: space-between;
+  /* gap: 5rem; */
+  /* margin-top: 2rem; */
+  /* padding: 8px; */
+}
+
+.edit-button {
+  flex: 1;
+  width: 5.56rem;
+  margin: 0 0.5rem;
+  padding: 8px;
+  font-size: 0.81rem;
+  /* font-weight: bold; */
+  border-color: #00bc77;
+  background-color: #00bc77;
+  color: #fff;
+}
+
+.modal-button {
+  width: 120px; /* Set width for both buttons */
+  padding: 8px;
+  font-size: 0.8rem;
+  /* font-weight: bold; */
+  border-color: #00bc77;
+  background-color: #00bc77;
+  color: #fff;
+  margin: 0 0.25rem;
 }
 
 .footer {
