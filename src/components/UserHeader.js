@@ -18,8 +18,9 @@ import React, { useState } from 'react';
 import Modal from './Modal';
 import EditNameForm from './EditName';
 
-const UserHeader = ({ firstName, lastName, userName }) => {
+const UserHeader = ({ userName, firstName, lastName }) => {
   const [showModal, setShowModal] = useState(false);
+  const [currentUserName, setCurrentUserName] = useState(userName); 
 
   const handleOpenModal = () => {
     setShowModal(true);
@@ -29,8 +30,9 @@ const UserHeader = ({ firstName, lastName, userName }) => {
     setShowModal(false);
   };
 
-  const handleSaveName = (newFirstName, newLastName) => {
-    console.log("Name saved:", newFirstName, newLastName);
+  const handleSaveUserName = (newUserName) => {
+    console.log("Username saved:", newUserName);
+    setCurrentUserName(newUserName);
     setShowModal(false);
   };
 
@@ -38,13 +40,14 @@ const UserHeader = ({ firstName, lastName, userName }) => {
     <div className="header">
       <h1>Welcome back<br />{firstName} {lastName}!</h1>
       <button className="edit-button" onClick={handleOpenModal}>Edit Name</button>
-      <Modal show={showModal} handleClose={handleCancelModal}>
+      <Modal show={showModal} handleCancel={handleCancelModal}>
         <EditNameForm 
-        currentUserName={userName}
+        currentUserName={currentUserName}
         currentFirstName={firstName} 
         currentLastName={lastName} 
-        handleSave={handleSaveName} 
-        handleClose={handleCancelModal}  />
+        handleSave={handleSaveUserName} 
+        handleCancel={handleCancelModal}  
+        />
       </Modal>
     </div>
   );
