@@ -408,6 +408,15 @@ margin-right: 0.27rem;
 .header {
   color: #fff;
   margin-bottom: 2rem;
+  transition: min-height 0.3s ease;
+}
+
+/* .header.small {
+  min-height: 200px; 
+} */
+
+.header.large {
+  min-height: 300px; 
 }
 
 .transaction-button {

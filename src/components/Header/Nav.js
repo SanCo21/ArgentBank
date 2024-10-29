@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Nav = ({isSignedIn, username}) => (
+const Nav = ({isSignedIn, username, handleSignOut }) => (
   <div>
     {isSignedIn ? (
       <div>
@@ -9,7 +9,7 @@ const Nav = ({isSignedIn, username}) => (
           <i className="fa fa-user-circle"></i>
           {username}
         </Link>
-        <Link className="main-nav-item" to="/">
+        <Link className="main-nav-item" to="/" onClick={handleSignOut} >
           <i className="fa fa-sign-out"></i>
           Sign Out
         </Link>

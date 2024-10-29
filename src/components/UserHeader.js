@@ -37,18 +37,23 @@ const UserHeader = ({ userName, firstName, lastName }) => {
   };
 
   return (
-    <div className="header">
-      <h1>Welcome back<br />{firstName} {lastName}!</h1>
-      <button className="edit-button" onClick={handleOpenModal}>Edit Name</button>
-      <Modal show={showModal} handleCancel={handleCancelModal}>
-        <EditNameForm 
-        currentUserName={currentUserName}
-        currentFirstName={firstName} 
-        currentLastName={lastName} 
-        handleSave={handleSaveUserName} 
-        handleCancel={handleCancelModal}  
-        />
-      </Modal>
+    <div className={`header ${showModal ? 'large' : 'small'}`}>
+      {showModal ? (
+        <Modal show={showModal} handleCancel={handleCancelModal}>
+          <EditNameForm
+            currentUserName={currentUserName}
+            currentFirstName={firstName}
+            currentLastName={lastName}
+            handleSave={handleSaveUserName}
+            handleCancel={handleCancelModal}
+          />
+        </Modal>
+      ) : (
+        <div>
+          <h1>Welcome back<br />{firstName} {lastName}!</h1>
+          <button className="edit-button" onClick={handleOpenModal}>Edit Name</button>
+        </div>
+      )}
     </div>
   );
 };
