@@ -2,11 +2,11 @@ import React from 'react';
 import Logo from './Logo';
 import Nav from './Nav';
  
-const Header = () => (
-    <nav className="main-nav">
-      <Logo />
-      <Nav />
-    </nav>
-  );
+const Header = ({ isSignedIn, username, handleSignOut }) => (
+  <nav className="main-nav">
+    <Logo />
+    <Nav isSignedIn={isSignedIn} username={username} handleSignOut={handleSignOut} />
+  </nav>
+);
 
-export default Header
+export default Header;
