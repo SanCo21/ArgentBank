@@ -21,7 +21,8 @@ const SignIn = () => {
       const token = loginResponse.body.token;
       const user = await fetchUserData(token);      
 
-      dispatch(setUser(user));
+      // Dispatch user and token to Redux
+      dispatch(setUser( { user, token }));
       navigate('/user'); // Redirect to User page after successful login
     } catch (error) {
       console.error("Login failed:", error);

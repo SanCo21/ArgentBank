@@ -42,3 +42,16 @@ export const fetchUserData = async (token) => {
         throw error;
     }
 };
+
+// To send a PUT request to the /profile endpoint with the user token and new user name
+export const updateUserNameAPI = async (token, newUserName) => {
+    try {
+      const response = await axios.put(`${API_URL}/profile`, 
+      { userName: newUserName }, 
+      { headers: { Authorization: `Bearer ${token}` } });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+  
