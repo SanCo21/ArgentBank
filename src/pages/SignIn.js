@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setUser } from "../reducers/userReducer";
-import { login } from "../API/userService";
+import { login, fetchUserData } from "../API/userService";
 import InputWrapper from "../components/InputWrapper";
 import CheckboxWrapper from "../components/CheckboxWrapper";
 
@@ -14,33 +14,32 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const loginData = { email, password }; // Change username to email
-  //     console.log('Login Data:', loginData); // Log the data being sent
-  //     // const loginResponse = await login(loginData);
-  //     const token = await login({ email, password }); // Change username to email
-  //     const user = { firstName: 'Tony', lastName: 'Jarvis' }; // Mock user data;
-  //     dispatch(setUser(user));
-  //     navigate('/user'); // Redirect to User page after successful login } catch (error) {
-  //   } catch (error) {
-  //     console.error("Login failed:", error);
-  //   }
-  // };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {      
+      const loginResponse = await login({ email, password }); // Change username to email
+      const token = loginResponse.body.token;
+      const user = await fetchUserData(token);      
 
-  const handleSubmit = async (e) => { 
-    e.preventDefault(); 
-    try { 
-      const loginData = { email, password }; // Change username to email 
-      console.log('Login Data:', loginData); // Log the data being sent 
-      const user = await login(loginData); 
-      dispatch(setUser(user)); 
+      dispatch(setUser(user));
       navigate('/user'); // Redirect to User page after successful login
-    } catch (error) {  
-      console.error("Login failed:", error); 
-    } 
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
   };
+
+  // const handleSubmit = async (e) => { 
+  //   e.preventDefault(); 
+  //   try { 
+  //     const loginData = { email, password }; // Change username to email 
+  //     console.log('Login Data:', loginData); // Log the data being sent 
+  //     const user = await login(loginData); 
+  //     dispatch(setUser(user)); 
+  //     navigate('/user'); // Redirect to User page after successful login
+  //   } catch (error) {  
+  //     console.error("Login failed:", error); 
+  //   } 
+  // };
 
   return (
     <main className="main bg-dark">
