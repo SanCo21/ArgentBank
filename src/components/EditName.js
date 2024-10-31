@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"; 
 import { updateUserName } from "../reducers/userReducer"; 
 import { updateUserNameAPI } from "../API/userService"; 
-const EditNameForm = ({ currentUserName, currentFirstName, currentLastName, handleSave, handleCancel }) => { 
+
+const EditNameForm = ({ currentUserName = "", currentFirstName = "", currentLastName = "", handleSave, handleCancel }) => {
+// const EditNameForm = ({ currentUserName, currentFirstName, currentLastName, handleSave, handleCancel }) => { 
     const [userName, setUserName] = useState(currentUserName); 
     const dispatch = useDispatch(); 
     const token = useSelector((state) => state.user.token);
