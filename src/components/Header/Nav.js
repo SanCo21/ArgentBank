@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Nav = ({isSignedIn, username, handleSignOut }) => (
+const Nav = ({isSignedIn, firstName, handleSignOut }) => (
   <div>
     {isSignedIn ? (
       <div>
         <Link className="main-nav-item" to="/User">
           <i className="fa fa-user-circle"></i>
-          {username}
+          {firstName}
         </Link>
         <Link className="main-nav-item" to="/" onClick={handleSignOut} >
           <i className="fa fa-sign-out"></i>

@@ -1,11 +1,15 @@
-import React from 'react';
-import Logo from './Logo';
-import Nav from './Nav';
- 
-const Header = ({ isSignedIn, username, handleSignOut }) => (
+import React from "react";
+import Logo from "./Logo";
+import Nav from "./Nav";
+
+const Header = ({ isSignedIn, firstName, handleSignOut }) => (
   <nav className="main-nav">
     <Logo />
-    <Nav isSignedIn={isSignedIn} username={username} handleSignOut={handleSignOut} />
+    <Nav
+      isSignedIn={isSignedIn}
+      firstName={firstName}
+      handleSignOut={handleSignOut}
+    />
   </nav>
 );
 

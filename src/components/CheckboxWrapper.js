@@ -1,18 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types'
 
-const CheckboxWrapper = ({ label, id }) => {
+const CheckboxWrapper = ({ label, id, checked, onChange }) => {
   return (
     <div className="input-remember">
-      <input type="checkbox" id={id} />
+      <input type="checkbox" id={id} checked={checked} onChange={onChange} />
       <label htmlFor={id}>{label}</label>
     </div>
   );
 };
 
-CheckboxWrapper.propTypes = {
-    label: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired
-};
-  
 export default CheckboxWrapper;
