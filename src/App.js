@@ -35,7 +35,7 @@ const App = () => {
     <Router>
       <Header
         isSignedIn={!!user}
-        firstName={user ? user.firstName : ""}
+        userName={user ? user.userName : ""}
         handleSignOut={handleSignOut}
       />
       <Routes>
