@@ -77,7 +77,7 @@ const SignIn = () => {
       const user = await fetchUserData(token);
 
       // Dispatch user and token to Redux
-      dispatch(setUser({ user, token }));
+      dispatch(setUser({ user, token, rememberMe }));
       navigate("/user"); // Redirect to User page after successful login
     } catch (error) {
       console.error("Login failed:", error);
@@ -133,7 +133,6 @@ const SignIn = () => {
             Sign In
           </button>
         </form>
-        {/* {error && <p className="error-message">{error}</p>} */}
       </section>
     </main>
   );
