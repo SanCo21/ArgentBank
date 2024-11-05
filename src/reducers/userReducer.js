@@ -21,7 +21,7 @@ const initialState = {
   user: null,
   token: null,
   rememberMe: false,
-  status: "idle",
+  status: "idle", // initial state, inactivity
   error: null,
 };
 
@@ -33,7 +33,7 @@ const userSlice = createSlice({
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.rememberMe = action.payload.rememberMe;
-      console.log('User set:', state.user);
+      // console.log('User set:', state.user);
     },
     signOut(state) {
       state.user = null;
@@ -48,16 +48,16 @@ const userSlice = createSlice({
   },
 
   extraReducers: (builder) => {
-    builder
+    builder      
       .addCase(loginUser.pending, (state) => {
-        state.status = "loading";
-      })
+        state.status = "loading"; // Update the state when the action is in progress
+      })      
       .addCase(loginUser.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = "succeeded"; // Update the state when the action is successful
         state.token = action.payload.body.token;
-      })
+      })      
       .addCase(loginUser.rejected, (state, action) => {
-        state.status = "failed";
+        state.status = "failed"; // Update the state when the action fails and log the error
         state.error = action.error.message;
       })
       .addCase(fetchUserProfile.pending, (state) => {
