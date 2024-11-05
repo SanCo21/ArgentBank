@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setUser } from "../reducers/userReducer";
-import { login, fetchUserData } from "../API/userService";
+import { loginUser, fetchUserProfile, setUser } from "../reducers/userReducer";
+// import { login, fetchUserData } from "../API/userService";
 import InputWrapper from "../components/InputWrapper";
 import CheckboxWrapper from "../components/CheckboxWrapper";
 import { FaCheck } from "react-icons/fa";
@@ -10,16 +10,18 @@ import { FaCheck } from "react-icons/fa";
 const SignIn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const [username, setUsername] = useState("");
+  const { status } = useSelector((state) => state.user);
   const [email, setEmail] = useState(""); // Change username to email
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
-  // const [error, setError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
+  const [emailHasError, setEmailHasError] = useState(false);
+  const [passwordHasError, setPasswordHasError] = useState(false);
+  // const [hasError, setHasError] = useState(false);
 
   // Regex with letters, numbers, dots, underscores, and hyphens in local part
   // and letters, numbers, and hyphens in domain part and a length of 2 to 4 letters in the top-level domain
@@ -38,12 +40,15 @@ const SignIn = () => {
     if (email && !validateEmail(email)) {
       setEmailError("Invalid email format");
       setIsEmailValid(false);
+      setEmailHasError(true);
     } else if (email && validateEmail(email)) {
       setEmailError("");
       setIsEmailValid(true);
+      setEmailHasError(false);
     } else {
       setEmailError("");
       setIsEmailValid(false);
+      setEmailHasError(false);
     }
 
     if (password && !validatePassword(password)) {
@@ -51,12 +56,15 @@ const SignIn = () => {
         "Password must be at least 8 characters long and contain at least one number"
       );
       setIsPasswordValid(false);
+      setPasswordHasError(true);
     } else if (password && validatePassword(password)) {
       setPasswordError("");
       setIsPasswordValid(true);
+      setPasswordHasError(false);
     } else {
       setPasswordError("");
       setIsPasswordValid(false);
+      setPasswordHasError(false);
     }
 
     if (validateEmail(email) && validatePassword(password)) {
@@ -70,20 +78,32 @@ const SignIn = () => {
     e.preventDefault();
     setEmailError("");
     setPasswordError("");
+    setEmailHasError(false); 
+    setPasswordHasError(false);
 
     try {
-      const loginResponse = await login({ email, password }); // Change username to email
-      const token = loginResponse.body.token;
-      const user = await fetchUserData(token);
+      const loginResult = await dispatch(
+        loginUser({ email, password })
+      ).unwrap(); // Change username to email
+      const token = loginResult.body.token;
+      const user = await dispatch(fetchUserProfile(token)).unwrap();
 
       // Dispatch user and token to Redux
       dispatch(setUser({ user, token, rememberMe }));
       navigate("/user"); // Redirect to User page after successful login
     } catch (error) {
       console.error("Login failed:", error);
-      setEmailError("Login failed. Please check your credentials and try again.");
+      setEmailHasError(true); 
+      setPasswordHasError(true);
+      setEmailError(
+        "Login failed. Please check your credentials and try again."
+      );
     }
   };
+
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
 
   return (
     <main className="main bg-dark">
@@ -103,7 +123,7 @@ const SignIn = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            {isEmailValid && <FaCheck className="valid-check" />}
+            {isEmailValid && !emailHasError && <FaCheck className="valid-check" />}
           </div>
           <div
             className={`input-wrapper ${
@@ -117,7 +137,7 @@ const SignIn = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            {isPasswordValid && <FaCheck className="valid-check" />}
+            {isPasswordValid && !passwordHasError && <FaCheck className="valid-check" />}
           </div>
           <CheckboxWrapper
             label="Remember me"

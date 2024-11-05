@@ -7,9 +7,6 @@ const Modal = ({ show, handleCancel, children }) => {
     <div className={showHideClassName}>
       <section className="modal-main">
         {children}
-        {/* <button type="button" onClick={handleCancel}>
-            Cancel
-        </button> */}
       </section>
     </div>
   );
