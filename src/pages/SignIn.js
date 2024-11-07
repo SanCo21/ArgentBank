@@ -21,7 +21,6 @@ const SignIn = () => {
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [emailHasError, setEmailHasError] = useState(false);
   const [passwordHasError, setPasswordHasError] = useState(false);
-  // const [hasError, setHasError] = useState(false);
 
   // Regex with letters, numbers, dots, underscores, and hyphens in local part
   // and letters, numbers, and hyphens in domain part and a length of 2 to 4 letters in the top-level domain
@@ -36,21 +35,27 @@ const SignIn = () => {
   };
 
   useEffect(() => {
-    // Check if all fields are filled and valid
+
+    // Check if the email is non-empty and invalid
     if (email && !validateEmail(email)) {
-      setEmailError("Invalid email format");
-      setIsEmailValid(false);
-      setEmailHasError(true);
+      setEmailError("Invalid email format"); // Set error message indicating the email format is invalid
+      setIsEmailValid(false); // Update state to indicate the email is invalid
+      setEmailHasError(true); // Update state to indicate there is an email error
+
+      // Check if the email is non-empty and valid
     } else if (email && validateEmail(email)) {
-      setEmailError("");
-      setIsEmailValid(true);
-      setEmailHasError(false);
+      setEmailError(""); // Clear the error message because the email is valid
+      setIsEmailValid(true); // Update state to indicate the email is valid
+      setEmailHasError(false); // Update state to indicate there is no email error
+
+      // If the email is empty
     } else {
-      setEmailError("");
-      setIsEmailValid(false);
-      setEmailHasError(false);
+      setEmailError(""); // Clear the error message because the email is empty
+      setIsEmailValid(false); // Update state to indicate the email is invalid (because it is empty)
+      setEmailHasError(false); // Update state to indicate there is no email error (because it is empty)
     }
 
+    // Check if the password is valid
     if (password && !validatePassword(password)) {
       setPasswordError(
         "Password must be at least 8 characters long and contain at least one number"
@@ -67,6 +72,7 @@ const SignIn = () => {
       setPasswordHasError(false);
     }
 
+    // Check if the 2 fiels are valid to enable the button
     if (validateEmail(email) && validatePassword(password)) {
       setIsButtonDisabled(false);
     } else {
