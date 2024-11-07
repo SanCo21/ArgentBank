@@ -35,7 +35,7 @@ body,
   flex: 1;
   /* height: 100%;  */
   /* Cover the entire height of the viewport */
-  min-height: 85vh;
+  /* min-height: 100vh; */
   /* Assure a minimal height */
 }
 
@@ -58,7 +58,12 @@ body,
   white-space: nowrap !important; /* 3 */
 }
 
-.main-nav {
+.main-nav { 
+  position: -webkit-sticky; 
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -334,7 +339,7 @@ body,
 
 .modal {
   position: fixed;
-  top: 3rem;
+  top: 4rem;
   left: 0;
   width: 100%;
   /* height: 20%; */
@@ -384,7 +389,12 @@ body,
   border-radius: 5px;
 }
 
-.footer {
+.footer {  
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
   display: flex;
   justify-content: center;
   border-top: 2px solid #ccc;
@@ -480,4 +490,41 @@ body,
   .transaction-button {
     width: 200px;
   }
+}
+
+.error-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #ffffff; 
+  color: #222; 
+  text-align: center;
+}
+
+.error-page h1 {
+  font-size: 5rem;
+  margin-bottom: 20px;
+  color: #00472d; 
+}
+
+.error-page p {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.error-page a {
+  display: inline-block;
+  padding: 10px 20px;
+  /* background-color: #0073e6;  */
+  color: #00bc77;
+  text-decoration: none;
+  font-weight: bold;
+  /* border-radius: 5px; */
+  transition: background-color 0.3s;
+}
+
+.error-page a:hover {
+  color: #00472d; 
 }

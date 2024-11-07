@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { loginUser, fetchUserProfile, setUser } from "../reducers/userReducer";
+import { loginUser, fetchUserProfile, setUser } from "../reducers/userSlice";
 // import { login, fetchUserData } from "../API/userService";
 import InputWrapper from "../components/InputWrapper";
 import CheckboxWrapper from "../components/CheckboxWrapper";
@@ -35,7 +35,6 @@ const SignIn = () => {
   };
 
   useEffect(() => {
-
     // Check if the email is non-empty and invalid
     if (email && !validateEmail(email)) {
       setEmailError("Invalid email format"); // Set error message indicating the email format is invalid
@@ -84,7 +83,7 @@ const SignIn = () => {
     e.preventDefault();
     setEmailError("");
     setPasswordError("");
-    setEmailHasError(false); 
+    setEmailHasError(false);
     setPasswordHasError(false);
 
     try {
@@ -99,11 +98,20 @@ const SignIn = () => {
       navigate("/user"); // Redirect to User page after successful login
     } catch (error) {
       console.error("Login failed:", error);
-      setEmailHasError(true); 
-      setPasswordHasError(true);
-      setEmailError(
-        "Login failed. Please check your credentials and try again."
-      );
+      console.log("Error details:", error);
+      console.log("Error response:", error.response);
+
+      if (error.response && error.response.status === 404) { 
+        console.log("Error response status 404:", error.response.status);
+        navigate("/error"); // Redirect to Error page if the status code is 404 with a response
+      } else if (error.message === "Request failed with status code 404") { 
+        console.log("Error message indicates status 404");
+          navigate("/error"); // Redirect to Error page if the status code is 404 without a response
+      } else { 
+        setEmailHasError(true); 
+        setPasswordHasError(true); 
+        setEmailError("Login failed. Please check your credentials and try again."); 
+      } 
     }
   };
 
@@ -129,7 +137,9 @@ const SignIn = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            {isEmailValid && !emailHasError && <FaCheck className="valid-check" />}
+            {isEmailValid && !emailHasError && (
+              <FaCheck className="valid-check" />
+            )}
           </div>
           <div
             className={`input-wrapper ${
@@ -143,7 +153,9 @@ const SignIn = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            {isPasswordValid && !passwordHasError && <FaCheck className="valid-check" />}
+            {isPasswordValid && !passwordHasError && (
+              <FaCheck className="valid-check" />
+            )}
           </div>
           <CheckboxWrapper
             label="Remember me"

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserName } from "../reducers/userReducer";
+import { updateUserName } from "../reducers/userSlice";
 import { updateUserNameAPI } from "../API/userService";
 
 const EditNameForm = ({
@@ -38,16 +38,16 @@ const EditNameForm = ({
 
   return (
     <section className="modal">
-      <h2>Edit user info</h2>  
-      {error && <span className="error-message">{error}</span>}      
+      <h2>Edit user info</h2>
+      {error && <span className="error-message">{error}</span>}
       <form onSubmit={handleSubmit} className="edit-form">
         <div className="edit-input-wrapper">
-          <label>User name:</label>            
-            <input
-                type="text"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-            />          
+          <label>User name:</label>
+          <input
+            type="text"
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
+          />
         </div>
         <div className="edit-input-wrapper">
           <label> First name:</label> {/* Displaying read-only */}

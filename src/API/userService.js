@@ -18,7 +18,6 @@ export const login = async (loginData) => {
     const response = await axios.post(`${API_URL}/login`, loginData);
     // console.log("Login Response Data:", response.data); // Log response data
     return response.data;
-    // return response.data.body.token; // Return the token
   } catch (error) {
     throw error;
   }
@@ -31,7 +30,6 @@ export const fetchUserData = async (token) => {
             headers: { Authorization: `Bearer ${token}` }
         });
         console.log('User Data:', response.data.body); // Log the data received
-        // return response.data.body; // Return user data
         const userData = response.data.body;
         return { ...userData,
             firstName: userData.firstName, 
