@@ -103,8 +103,8 @@ body,
 }
 
 .hero {
-  /* background-image: url('/public/images/bank-tree.webp'); */
-  background-image: url("/public/images/bank-tree.jpg");
+  background-image: url('/public/images/bank-tree.webp');
+  /* background-image: url("/public/images/bank-tree.jpg"); */
   background-position: 0 -50px;
   background-size: cover;
   background-repeat: no-repeat;
