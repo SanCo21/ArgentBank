@@ -44,7 +44,7 @@ const User = () => {
           ))}
         </>
       ) : (
-        <p>Please sign in to view your account details.</p>
+        <p className="error">Please sign in to view your account details.</p>
       )}
     </main>
 
